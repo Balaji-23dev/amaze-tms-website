@@ -1,47 +1,34 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const siteUrl = "https://tms.amazetech.net";
-
 export const metadata: Metadata = {
-  title: "Amaze Tech Solutions — TMS Back-Office Services for Trucking Companies",
+  title: "Amaze Tech Solutions — TMS Back-Office Services for Carriers",
   description:
-    "Expert TMS back-office services for trucking companies in Canada and USA. We work with YOUR existing TMS software — no changes needed. PRO numbers, customs docs, EDI tracking, freight billing, dispatch support, and more.",
+    "Expert TMS back-office support for mid-size carriers in the US & Canada. 24/7 operations, zero software changes. Load entry, dispatch, billing, tracking & more.",
   keywords: [
-    "TMS services",
-    "trucking management",
-    "back-office BPO",
-    "PRO numbers",
-    "EDI tracking",
-    "customs documentation",
-    "freight management",
-    "logistics BPO",
-    "TMS outsourcing",
-    "trucking back office services",
-    "freight billing services",
+    "TMS back office",
+    "transport management system support",
+    "freight carrier services",
+    "trucking back office",
     "dispatch support",
+    "load entry services",
+    "carrier billing services",
     "cross-border customs",
-    "Canada trucking BPO",
-    "TMS support services",
+    "3PL support",
+    "Amaze Tech Solutions",
   ],
-  metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: siteUrl,
-  },
+  authors: [{ name: "Amaze Tech Solutions Pvt Ltd" }],
   openGraph: {
-    title: "Amaze Tech Solutions — TMS Back-Office Services",
+    title: "Amaze Tech Solutions — Your TMS. Our Expertise.",
     description:
-      "Expert TMS back-office services for trucking companies in Canada & USA. We work with YOUR existing TMS software — no changes needed.",
-    url: siteUrl,
+      "Expert TMS back-office support for mid-size carriers. 24/7 operations, zero software changes, cut costs by 50%.",
+    url: "https://tms.amazetech.net",
     siteName: "Amaze Tech Solutions",
-    type: "website",
     locale: "en_US",
+    type: "website",
     images: [
       {
-        url: `${siteUrl}/og-image.png`,
+        url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80",
         width: 1200,
         height: 630,
         alt: "Amaze Tech Solutions — TMS Back-Office Services",
@@ -50,56 +37,40 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amaze Tech Solutions — TMS Back-Office Services",
+    title: "Amaze Tech Solutions — Your TMS. Our Expertise.",
     description:
-      "Expert TMS back-office services for trucking companies in Canada & USA. We work with YOUR existing TMS software — no changes needed.",
-    images: [`${siteUrl}/og-image.png`],
+      "Expert TMS back-office support for mid-size carriers. 24/7 operations, zero software changes.",
   },
-  other: {
-    "theme-color": "#0d9488",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      name: "Amaze Tech Solutions Pvt Ltd",
-      url: "https://amazetech.net",
-      logo: `${siteUrl}/og-image.png`,
-      contactPoint: {
-        "@type": "ContactPoint",
-        email: "sales@amazetech.net",
-        contactType: "sales",
-        areaServed: ["CA", "US"],
-        availableLanguage: ["English"],
-      },
-      sameAs: ["https://amazetech.net"],
-    },
-    {
-      "@type": "LocalBusiness",
-      name: "Amaze Tech Solutions — TMS Services",
-      url: siteUrl,
-      email: "sales@amazetech.net",
-      description:
-        "Expert TMS back-office services for trucking companies. PRO numbers, customs docs, EDI tracking, freight billing, dispatch support.",
-      areaServed: [
-        { "@type": "Country", name: "Canada" },
-        { "@type": "Country", name: "United States" },
-      ],
-      serviceType: [
-        "TMS Back-Office Services",
-        "Freight Billing Services",
-        "Dispatch Support",
-        "Cross-Border Customs Documentation",
-        "EDI Tracking",
-      ],
-    },
+  "@type": "ProfessionalService",
+  name: "Amaze Tech Solutions Pvt Ltd",
+  description:
+    "Expert TMS back-office support for mid-size carriers in the US & Canada.",
+  url: "https://tms.amazetech.net",
+  telephone: "+18888080131",
+  email: "sales@amazetech.net",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "1 Auer Ct",
+    addressLocality: "East Brunswick",
+    addressRegion: "NJ",
+    postalCode: "08816",
+    addressCountry: "US",
+  },
+  areaServed: [
+    { "@type": "Country", name: "United States" },
+    { "@type": "Country", name: "Canada" },
+  ],
+  serviceType: [
+    "TMS Back-Office Support",
+    "Freight Dispatch Services",
+    "Carrier Billing Services",
+    "Cross-Border Customs Documentation",
+    "Load Entry and Tracking",
   ],
 };
 
@@ -111,14 +82,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#0d9488" />
-        <link rel="canonical" href={siteUrl} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

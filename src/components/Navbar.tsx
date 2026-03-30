@@ -1,75 +1,113 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+
+const links = [
+  { label: "Services", href: "#services" },
+  { label: "Industries", href: "#industries" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "nav-glass bg-white/80 border-b border-black/[0.04]"
+          : "bg-transparent"
+      }`}
+    >
+      <nav className="max-w-[1120px] mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center font-bold text-white text-lg">
-            A
-          </div>
-          <div>
-            <span className="text-white font-bold text-lg tracking-tight">
-              Amaze Tech
-            </span>
-            <span className="block text-[10px] text-teal-400 -mt-1 tracking-widest uppercase">
-              TMS Solutions
-            </span>
-          </div>
+        <a href="#" className="flex items-center gap-2.5 shrink-0">
+          <img
+            src="/logo.png"
+            alt="Amaze Tech Solutions"
+            className="h-8 w-auto"
+          />
         </a>
 
-        {/* Desktop Menu */}
+        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="#services" className="text-sm text-slate-300 hover:text-teal-400 transition-colors">
-            Services
-          </a>
-          <a href="#industries" className="text-sm text-slate-300 hover:text-teal-400 transition-colors">
-            Industries
-          </a>
-          <a href="#about" className="text-sm text-slate-300 hover:text-teal-400 transition-colors">
-            About
-          </a>
-          <a href="#testimonials" className="text-sm text-slate-300 hover:text-teal-400 transition-colors">
-            Testimonials
-          </a>
+          {links.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              className="text-[13px] font-normal text-apple-text/70 hover:text-apple-text transition-colors duration-200"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <a
+          href="#contact"
+          className="hidden md:inline-flex text-[13px] font-medium bg-teal text-white px-5 py-1.5 rounded-full hover:bg-teal-dark transition-colors duration-200"
+        >
+          Get a Quote
+        </a>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-[5px]"
+          aria-label="Menu"
+        >
+          <span
+            className={`block w-[18px] h-[1.5px] bg-apple-text transition-all duration-300 ${
+              open ? "rotate-45 translate-y-[6.5px]" : ""
+            }`}
+          />
+          <span
+            className={`block w-[18px] h-[1.5px] bg-apple-text transition-all duration-300 ${
+              open ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block w-[18px] h-[1.5px] bg-apple-text transition-all duration-300 ${
+              open ? "-rotate-45 -translate-y-[6.5px]" : ""
+            }`}
+          />
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-400 ${
+          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="nav-glass bg-white/95 border-t border-black/[0.04] px-6 py-5 flex flex-col gap-3">
+          {links.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="text-[15px] text-apple-text/80 py-2 hover:text-apple-text transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
           <a
             href="#contact"
-            className="btn-primary px-5 py-2.5 rounded-lg text-sm font-semibold text-white"
+            onClick={() => setOpen(false)}
+            className="btn-primary text-[15px] mt-2 text-center"
           >
             Get a Quote
           </a>
         </div>
-
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden text-white"
-          aria-label="Toggle menu"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {open ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
       </div>
-
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden bg-[#0a0a0f]/95 backdrop-blur-xl border-t border-white/5 px-6 py-4 space-y-4">
-          <a href="#services" className="block text-slate-300 hover:text-teal-400" onClick={() => setOpen(false)}>Services</a>
-          <a href="#industries" className="block text-slate-300 hover:text-teal-400" onClick={() => setOpen(false)}>Industries</a>
-          <a href="#about" className="block text-slate-300 hover:text-teal-400" onClick={() => setOpen(false)}>About</a>
-          <a href="#testimonials" className="block text-slate-300 hover:text-teal-400" onClick={() => setOpen(false)}>Testimonials</a>
-          <a href="#contact" className="btn-primary block text-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white" onClick={() => setOpen(false)}>Get a Quote</a>
-        </div>
-      )}
-    </nav>
+    </header>
   );
 }

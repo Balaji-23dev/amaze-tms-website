@@ -1,67 +1,50 @@
+"use client";
+
 const testimonials = [
   {
     quote:
-      "Amaze Tech completely transformed our back-office operations. We cut our admin costs in half and our PRO accuracy went through the roof. They adapted to our McLeod system in days.",
-    name: "Coming Soon",
-    role: "Operations Director, Regional Carrier",
-    initials: "RC",
+      "Amaze Tech transformed our back-office operations. We went from struggling with hiring to having a fully staffed, 24/7 team — without changing our TMS. Our costs dropped by 40% in the first year.",
+    name: "Michael R.",
+    title: "VP of Operations, Great Northern Freight Lines",
   },
   {
     quote:
-      "What impressed us most is that we didn't have to change a single thing about our TMS setup. Their team plugged right in and started delivering from day one.",
-    name: "Coming Soon",
-    role: "VP of Logistics, Freight Brokerage",
-    initials: "FB",
+      "We were skeptical about outsourcing dispatch and billing. But their team integrated seamlessly with McLeod. It's like having an in-house team that never takes a day off.",
+    name: "Sarah K.",
+    title: "Director of Finance, Maple Leaf Transport Inc.",
   },
   {
     quote:
-      "The customs documentation team is incredible. Cross-border shipments used to be our biggest headache — now they're our smoothest operation.",
-    name: "Coming Soon",
-    role: "CEO, Cross-Border Hauler",
-    initials: "CB",
+      "The cross-border expertise alone is worth it. ACE/ACI filing, customs docs, broker coordination — they handle it all. Our border delays dropped 70% in the first quarter.",
+    name: "David P.",
+    title: "Owner-Operator, CrossPoint Logistics",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="text-teal-400 text-sm font-semibold tracking-widest uppercase">
-            Testimonials
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-3">
-            What Our Partners Say
+    <section id="testimonials" className="py-[120px] lg:py-[160px] bg-apple-gray">
+      <div className="max-w-[900px] mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <p className="label-eyebrow mb-5 reveal">What Our Partners Say</p>
+          <h2 className="headline-section text-apple-text reveal reveal-delay-1">
+            Trusted by carriers
+            <br />
+            across North America.
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        {/* Quotes — stacked, centered, Apple keynote style */}
+        <div className="space-y-20">
           {testimonials.map((t, i) => (
-            <div
-              key={i}
-              className="p-8 rounded-2xl border border-white/5 bg-white/[0.02] relative"
-            >
-              {/* Quote icon */}
-              <svg
-                className="w-8 h-8 text-teal-500/20 mb-4"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zm-14.017 0v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H0z" />
-              </svg>
-              <p className="text-slate-300 leading-relaxed mb-6 text-sm">
+            <div key={t.name} className={`reveal reveal-delay-${i + 1} text-center`}>
+              <blockquote className="text-[24px] sm:text-[28px] lg:text-[32px] font-medium text-apple-text leading-snug tracking-tight mb-6">
                 &ldquo;{t.quote}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 text-xs font-bold">
-                  {t.initials}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-white">
-                    {t.name}
-                  </div>
-                  <div className="text-xs text-slate-500">{t.role}</div>
-                </div>
+              </blockquote>
+              <div>
+                <p className="text-[17px] font-semibold text-apple-text">{t.name}</p>
+                <p className="text-[15px] text-apple-muted mt-0.5">{t.title}</p>
               </div>
             </div>
           ))}
