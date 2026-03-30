@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --teal-primary: #0d9488;
+  --teal-light: #14b8a6;
+  --teal-dark: #0f766e;
+  --dark-bg: #0a0a0f;
+  --dark-card: #111118;
+  --dark-border: #1e1e2a;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Scrolling Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Service card hover */
+.service-card {
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--dark-card);
+  border-color: var(--teal-primary);
+}
+
+.service-card:hover .service-number {
+  color: var(--teal-primary);
+}
+
+/* CTA glow effect */
+.btn-primary {
+  background: var(--teal-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: var(--teal-light);
+  box-shadow: 0 0 30px rgba(13, 148, 136, 0.4);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--teal-light), var(--teal-primary), #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

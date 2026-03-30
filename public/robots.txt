@@ -1,0 +1,5 @@
+# robots.txt for tms.amazetech.net
+User-agent: *
+Allow: /
+
+Sitemap: https://tms.amazetech.net/sitemap.xml
