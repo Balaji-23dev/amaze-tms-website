@@ -1,48 +1,54 @@
 "use client";
 
+const capabilities = [
+  "ACE/ACI Filing",
+  "Customs Docs",
+  "HS Code Validation",
+  "Broker Coordination",
+  "Border Paperwork",
+  "Clearance Follow-ups",
+];
+
 export default function CrossBorder() {
   return (
-    <section className="py-[120px] lg:py-[160px] bg-apple-gray">
-      <div className="max-w-[1120px] mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="label-eyebrow mb-5 reveal">Cross-Border Expertise</p>
-          <h2 className="headline-section text-apple-text reveal reveal-delay-1">
-            Canada ↔ US.
-            <br />
-            <span className="text-teal">Seamless.</span>
-          </h2>
+    <section className="relative py-[120px] lg:py-[160px] overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=1600&q=80')",
+        }}
+      />
+      <div className="absolute inset-0 bg-navy-dark/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy/40 to-navy-dark/90" />
+
+      <div className="relative z-10 max-w-[900px] mx-auto px-6 text-center">
+        {/* Flags */}
+        <div className="flex items-center justify-center gap-4 mb-6 reveal">
+          <span className="text-[40px]">🇨🇦</span>
+          <span className="text-[28px] text-white/30 font-light">↔</span>
+          <span className="text-[40px]">🇺🇸</span>
         </div>
 
-        {/* Full-width image */}
-        <div className="reveal-scale mb-16">
-          <div className="img-cinematic aspect-[21/9]">
-            <img
-              src="https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=1400&q=80"
-              alt="Cross-border trucking between Canada and United States"
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        </div>
+        <h2 className="headline-section text-white mb-6 reveal reveal-delay-1">
+          Canada ↔ United States
+        </h2>
+        <p className="text-[19px] sm:text-[21px] text-white/60 leading-relaxed max-w-[600px] mx-auto mb-12 reveal reveal-delay-2">
+          Cross-border is our specialty. ACE/ACI, customs, compliance —
+          handled.
+        </p>
 
-        {/* Capabilities grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[900px] mx-auto">
-          {[
-            { title: "ACE/ACI eManifest Filing", desc: "Automated filing with real-time status tracking and error resolution." },
-            { title: "Customs Documentation", desc: "Complete paperwork preparation for seamless border crossings." },
-            { title: "HS Code Validation", desc: "Accurate classification to avoid delays and penalties." },
-            { title: "Broker Coordination", desc: "Direct communication with customs brokers on your behalf." },
-            { title: "Border Compliance", desc: "Full regulatory compliance for CBSA and CBP requirements." },
-            { title: "Clearance Follow-ups", desc: "Proactive monitoring until every shipment clears." },
-          ].map((item, i) => (
-            <div key={item.title} className={`reveal reveal-delay-${i + 1}`}>
-              <h3 className="text-[19px] font-semibold text-apple-text tracking-tight mb-2">
-                {item.title}
-              </h3>
-              <p className="text-[15px] text-apple-secondary leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
+        {/* Capability pills */}
+        <div className="flex flex-wrap justify-center gap-3 stagger-children reveal">
+          {capabilities.map((cap, i) => (
+            <span
+              key={cap}
+              data-stagger={i}
+              className="pill-tag bg-white/[0.08] text-white/80 border border-white/[0.1] hover:bg-teal/20 hover:border-teal/30 hover:text-white"
+            >
+              {cap}
+            </span>
           ))}
         </div>
       </div>

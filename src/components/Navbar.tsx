@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const links = [
   { label: "Services", href: "#services" },
   { label: "Industries", href: "#industries" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -19,22 +19,31 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "nav-glass bg-white/80 border-b border-black/[0.04]"
+          ? "nav-glass bg-white/80 shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-[1120px] mx-auto px-6 h-14 flex items-center justify-between">
+      <nav className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 shrink-0">
+        <a href="#" className="flex items-center gap-2.5 shrink-0 group">
           <img
             src="/logo.png"
             alt="Amaze Tech Solutions"
-            className="h-8 w-auto"
+            className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
           />
+          <span className="hidden sm:inline text-[15px] font-bold tracking-tight text-apple-text">
+            Amaze Tech
+          </span>
         </a>
 
         {/* Desktop links */}
@@ -43,7 +52,7 @@ export default function Navbar() {
             <a
               key={l.label}
               href={l.href}
-              className="text-[13px] font-normal text-apple-text/70 hover:text-apple-text transition-colors duration-200"
+              className="text-[14px] font-medium text-apple-text/60 hover:text-apple-text transition-colors duration-300 link-underline"
             >
               {l.label}
             </a>
@@ -53,7 +62,7 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="#contact"
-          className="hidden md:inline-flex text-[13px] font-medium bg-teal text-white px-5 py-1.5 rounded-full hover:bg-teal-dark transition-colors duration-200"
+          className="hidden md:inline-flex text-[14px] font-semibold bg-teal text-white px-6 py-2 rounded-full hover:bg-teal-dark hover:shadow-[0_4px_20px_rgba(13,148,136,0.3)] transition-all duration-300 hover:-translate-y-0.5"
         >
           Get a Quote
         </a>
@@ -61,40 +70,48 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-[5px]"
+          className="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-[5px] relative z-50"
           aria-label="Menu"
         >
           <span
-            className={`block w-[18px] h-[1.5px] bg-apple-text transition-all duration-300 ${
-              open ? "rotate-45 translate-y-[6.5px]" : ""
+            className={`block w-5 h-[2px] bg-apple-text rounded-full transition-all duration-300 ${
+              open ? "rotate-45 translate-y-[7px]" : ""
             }`}
           />
           <span
-            className={`block w-[18px] h-[1.5px] bg-apple-text transition-all duration-300 ${
-              open ? "opacity-0" : ""
+            className={`block w-5 h-[2px] bg-apple-text rounded-full transition-all duration-300 ${
+              open ? "opacity-0 scale-0" : ""
             }`}
           />
           <span
-            className={`block w-[18px] h-[1.5px] bg-apple-text transition-all duration-300 ${
-              open ? "-rotate-45 -translate-y-[6.5px]" : ""
+            className={`block w-5 h-[2px] bg-apple-text rounded-full transition-all duration-300 ${
+              open ? "-rotate-45 -translate-y-[7px]" : ""
             }`}
           />
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full screen slide-in */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-400 ${
-          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden fixed inset-0 top-16 z-40 transition-all duration-500 ${
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="nav-glass bg-white/95 border-t border-black/[0.04] px-6 py-5 flex flex-col gap-3">
-          {links.map((l) => (
+        <div className="absolute inset-0 bg-white/95 nav-glass" />
+        <div className="relative z-10 px-6 pt-8 flex flex-col gap-2">
+          {links.map((l, i) => (
             <a
               key={l.label}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-[15px] text-apple-text/80 py-2 hover:text-apple-text transition-colors"
+              className="text-[28px] font-bold text-apple-text tracking-tight py-3 transition-all duration-500"
+              style={{
+                transform: open ? "translateX(0)" : "translateX(-40px)",
+                opacity: open ? 1 : 0,
+                transitionDelay: `${i * 80}ms`,
+              }}
             >
               {l.label}
             </a>
@@ -102,7 +119,13 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="btn-primary text-[15px] mt-2 text-center"
+            className="btn-primary text-center mt-6"
+            style={{
+              transform: open ? "translateY(0)" : "translateY(20px)",
+              opacity: open ? 1 : 0,
+              transitionDelay: "350ms",
+              transitionDuration: "500ms",
+            }}
           >
             Get a Quote
           </a>

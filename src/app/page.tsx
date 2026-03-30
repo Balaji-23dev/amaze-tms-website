@@ -6,8 +6,8 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import ValueProp from "@/components/ValueProp";
 import Services from "@/components/Services";
+import Stats from "@/components/Stats";
 import CrossBorder from "@/components/CrossBorder";
-import Marquee from "@/components/Marquee";
 import Industries from "@/components/Industries";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
@@ -24,8 +24,8 @@ export default function Home() {
         <TrustBar />
         <ValueProp />
         <Services />
+        <Stats />
         <CrossBorder />
-        <Marquee />
         <Industries />
         <Testimonials />
         <CTA />
